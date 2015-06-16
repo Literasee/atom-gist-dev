@@ -6,40 +6,41 @@ path = require 'path'
 child_process = require 'child_process'
 
 module.exports = AtomGistDev =
-  atomGistDevView: null
-  modalPanel: null
+  gitCloneModal: null
   subscriptions: null
 
+  # package config options
   config:
-    target_directory:
+    target_directory: # where repos will be cloned
       type: 'string'
       default: '/tmp'
 
+  # package name
   name: 'atom-gist-dev'
 
+  # register commands that this package supports
   activate: (state) ->
-    @loadingView = new GitCloneLoadingView()
-    @loadingModalPanel = atom.workspace.addModalPanel(item: @loadingView, visible: false)
-    @gitCloneView = new GitCloneView(state.gitCloneViewState, @loadingModalPanel)
-    @modalPanel = atom.workspace.addModalPanel(item: @gitCloneView, visible: false)
-
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
 
-    # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:clone': => @clone()
 
+  # destroy views and subscriptions
   deactivate: ->
-    @modalPanel.destroy()
+    @gitCloneModal.destroy()
     @subscriptions.dispose()
-    @atomGistDevView.destroy()
 
-  serialize: ->
-    atomGistDevViewState: @atomGistDevView.serialize()
-
+  # clone Gist/repo
   clone: ->
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
+    if !@gitCloneLoadingView
+      @gitCloneLoadingView = new GitCloneLoadingView()
+      @gitCloneLoadingModal = atom.workspace.addModalPanel(item: @gitCloneLoadingView, visible: false)
+      @gitCloneView = new GitCloneView(@gitCloneLoadingModal)
+      @gitCloneModal = atom.workspace.addModalPanel(item: @gitCloneView, visible: false)
+      @gitCloneView.modal = @gitCloneModal
+
+    if @gitCloneModal.isVisible()
+      @gitCloneModal.hide()
     else
-      @modalPanel.show()
+      @gitCloneModal.show()
       @gitCloneView.focus()
