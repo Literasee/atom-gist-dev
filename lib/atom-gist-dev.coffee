@@ -1,6 +1,7 @@
 GitCloneView = require './git-clone-view'
 GitCloneLoadingView = require './git-clone-loading-view'
 {CompositeDisposable, BufferedProcess} = require 'atom'
+git = require 'git-auto'
 
 path = require 'path'
 child_process = require 'child_process'
@@ -24,6 +25,8 @@ module.exports = AtomGistDev =
     @subscriptions = new CompositeDisposable
 
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:clone': => @clone()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:save': => @save()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:save-share': => @save(true)
 
   # destroy views and subscriptions
   deactivate: ->
@@ -44,3 +47,7 @@ module.exports = AtomGistDev =
     else
       @gitCloneModal.show()
       @gitCloneView.focus()
+
+  save: (push) ->
+    p = atom.project.getDirectories()[0].path
+    git({base: p, group: true, push: push})

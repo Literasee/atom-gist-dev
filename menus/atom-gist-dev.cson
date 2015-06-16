@@ -14,6 +14,14 @@
         'label': 'Clone'
         'command': 'atom-gist-dev:clone'
       }
+      {
+        'label': 'Save'
+        'command': 'atom-gist-dev:save'
+      }
+      {
+        'label': 'Save and Share'
+        'command': 'atom-gist-dev:save-share'
+      }
     ]
   }
 ]

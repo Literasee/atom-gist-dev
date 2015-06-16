@@ -5,7 +5,9 @@
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "atom-gist-dev:clone"
+    "atom-workspace": "atom-gist-dev:clone",
+    "atom-workspace": "atom-gist-dev:save",
+    "atom-workspace": "atom-gist-dev:save-share"
   },
   "repository": "https://github.com/atom/atom-gist-dev",
   "license": "MIT",
