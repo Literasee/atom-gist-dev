@@ -19,8 +19,7 @@ class GitCloneView extends View
 
   initialize: ->
     @.on 'keydown', @handleKeyPress
-    @submitButton.on 'click', =>
-      console.log 'yo!!!'
+    @submitButton.on 'click', @doClone
 
   focus: ->
     @urlbar.focus()
@@ -31,38 +30,41 @@ class GitCloneView extends View
   handleKeyPress: (e) =>
     # enter
     if e.keyCode == 13
-      @loadingModalPanel.show()
-
-      # git url to clone from
-      repo_url = @.urlbar.getModel().getText()
-
-      # do clone
-      target_directory = atom.config.get("#{@name}.target_directory") || '/tmp'
-      # user inputted
-      # pull out the repo name from the uri
-      repo_name = get_repo_name(repo_url)
-      # get the full path to save the repo to
-      full_path = path.join(target_directory, repo_name)
-
-      if fs.existsSync(full_path)
-        console.log 'existing dir'
-        atom.open(pathsToOpen: [full_path], newWindow: true)
-        @loadingModalPanel.hide()
-        return
-
-      @clone_repo(repo_url, full_path, (err, loc) =>
-        unless err
-          atom.open(pathsToOpen: [loc], newWindow: true)
-
-        # close loading view
-        @loadingModalPanel.hide()
-      )
-      @clear()
-      @.parent().hide()
+      @doClone()
 
     # escape
     if e.keyCode == 27
       @.parent().hide()
+
+  doClone: =>
+    @loadingModalPanel.show()
+
+    # git url to clone from
+    repo_url = @.urlbar.getModel().getText()
+
+    # do clone
+    target_directory = atom.config.get("#{@name}.target_directory") || '/tmp'
+    # user inputted
+    # pull out the repo name from the uri
+    repo_name = get_repo_name(repo_url)
+    # get the full path to save the repo to
+    full_path = path.join(target_directory, repo_name)
+
+    if fs.existsSync(full_path)
+      console.log 'existing dir'
+      atom.open(pathsToOpen: [full_path], newWindow: true)
+      @loadingModalPanel.hide()
+      return
+
+    @clone_repo(repo_url, full_path, (err, loc) =>
+      unless err
+        atom.open(pathsToOpen: [loc], newWindow: true)
+
+      # close loading view
+      @loadingModalPanel.hide()
+    )
+    @clear()
+    @.parent().hide()
 
   clone_repo: (repo_url, full_path, callback) =>
     clone_stderr = ""
