@@ -1,5 +1,6 @@
 GitCloneView = require './git-clone-view'
 GitCloneLoadingView = require './git-clone-loading-view'
+get_repo_name = require './get-repo-name'
 {CompositeDisposable, BufferedProcess} = require 'atom'
 git = require 'git-auto'
 
@@ -54,3 +55,9 @@ module.exports = AtomGistDev =
       group: true
       push:  push
     })
+
+    if push
+      Promise.all(atom.project.getDirectories().map(atom.project.repositoryForDirectory.bind(atom.project))).then (repo) ->
+        repoName = get_repo_name(repo[0].getOriginURL())
+        atom.clipboard.write('http://bl.ocks.org/' + repoName)
+        alert('bl.ocks.org link has been copied to your clipboard!')

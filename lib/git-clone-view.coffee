@@ -7,11 +7,7 @@ child_process = require 'child_process'
 {CompositeDisposable, BufferedProcess} = require 'atom'
 
 # parse out repo name from url
-get_repo_name = (repo_url) ->
-  tmp = repo_url.split('/')
-  repo_name = tmp[tmp.length-1]
-  tmp = repo_name.split('.')
-  repo_name = tmp[...-1].join('.')
+get_repo_name = require './get-repo-name'
 
 module.exports =
   class GitCloneView extends View
