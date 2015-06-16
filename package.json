@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "atom-space-pen-views": "^2.0.5",
+    "git-auto": "^1.0.3",
     "space-pen": "^5.1.1"
   }
 }
