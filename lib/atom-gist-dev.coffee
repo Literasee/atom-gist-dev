@@ -49,5 +49,8 @@ module.exports = AtomGistDev =
       @gitCloneView.focus()
 
   save: (push) ->
-    p = atom.project.getDirectories()[0].path
-    git({base: p, group: true, push: push})
+    git({
+      base:  atom.project.getDirectories()[0].path
+      group: true
+      push:  push
+    })
