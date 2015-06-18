@@ -1,9 +1,13 @@
 {
   "name": "atom-gist-dev",
   "main": "./lib/atom-gist-dev",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [],
+  "version": "0.1.0",
+  "description": "A package to facilitate easy, all-in-one Gist development",
+  "keywords": [
+    "git",
+    "github",
+    "gist"
+  ],
   "activationCommands": {
     "atom-workspace": [
       "atom-gist-dev:clone",
@@ -11,7 +15,7 @@
       "atom-gist-dev:save-share"
     ]
   },
-  "repository": "https://github.com/atom/atom-gist-dev",
+  "repository": "https://github.com/CenterForAssessment/atom-gist-dev",
   "license": "MIT",
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
