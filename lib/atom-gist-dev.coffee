@@ -59,5 +59,5 @@ module.exports = AtomGistDev =
     if push
       Promise.all(atom.project.getDirectories().map(atom.project.repositoryForDirectory.bind(atom.project))).then (repo) ->
         repoName = get_repo_name(repo[0].getOriginURL())
-        atom.clipboard.write('http://bl.ocks.org/' + repoName)
-        alert('bl.ocks.org link has been copied to your clipboard!')
+        atom.clipboard.write('https://nciea-gist-viewer.herokuapp.com/' + repoName)
+        alert('nciea-gist-viewer link has been copied to your clipboard!')
