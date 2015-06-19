@@ -11,15 +11,15 @@
     'label': 'Gist Dev'
     'submenu': [
       {
-        'label': 'Clone'
+        'label': 'Clone a Gist Repository'
         'command': 'atom-gist-dev:clone'
       }
       {
-        'label': 'Save'
+        'label': 'Save Changes'
         'command': 'atom-gist-dev:save'
       }
       {
-        'label': 'Save and Share'
+        'label': 'Save Changes and Share on GitHub'
         'command': 'atom-gist-dev:save-share'
       }
     ]

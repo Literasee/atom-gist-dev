@@ -2,7 +2,7 @@
   "name": "atom-gist-dev",
   "main": "./lib/atom-gist-dev",
   "version": "0.1.0",
-  "description": "A package to facilitate easy, all-in-one Gist development",
+  "description": "A package to facilitate easy, all-in-one Gist development for non-developers",
   "keywords": [
     "git",
     "github",
@@ -20,6 +20,7 @@
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
   },
+  "readmeFilename": "README.md",
   "dependencies": {
     "atom-space-pen-views": "^2.0.5",
     "git-auto": "^1.0.3",
