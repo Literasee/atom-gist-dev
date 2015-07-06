@@ -47,7 +47,7 @@ module.exports =
       repo_url = @.urlbar.getModel().getText()
 
       # do clone
-      target_directory = atom.config.get("#{@name}.target_directory") || '/tmp'
+      target_directory = atom.config.get('atom-gist-dev.target_directory') || '/tmp'
       # user inputted
       # pull out the repo name from the uri
       repo_name = get_repo_name(repo_url)
