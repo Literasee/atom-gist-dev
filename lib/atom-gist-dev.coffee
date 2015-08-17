@@ -2,7 +2,8 @@ GitCloneView = require './git-clone-view'
 GitCloneLoadingView = require './git-clone-loading-view'
 get_repo_name = require './get-repo-name'
 {CompositeDisposable, BufferedProcess} = require 'atom'
-git = require 'git-auto'
+git = require 'gity'
+gitAuto = require 'git-auto'
 
 path = require 'path'
 child_process = require 'child_process'
@@ -26,6 +27,7 @@ module.exports = AtomGistDev =
     @subscriptions = new CompositeDisposable
 
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:clone': => @clone()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:pull': => @pull()
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:save': => @save()
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-gist-dev:save-share': => @save(true)
 
@@ -49,8 +51,29 @@ module.exports = AtomGistDev =
       @gitCloneModal.show()
       @gitCloneView.focus()
 
+  pull: ->
+    gitOpts = {base: atom.project.getDirectories()[0].path}
+
+    git(gitOpts)
+      .status()
+      .run((err, res) ->
+        if (err) then alert('Error checking status: ' + err)
+
+        edits = 0
+        edits += v.length for k, v of res
+        if (!edits) # if status is clean, pull
+          git(gitOpts)
+            .pull()
+            .run((err, res) ->
+              if (err) then alert('Error fetching changes: ' + err)
+              console.log res
+            )
+        else
+          alert('You have unsaved changes in your project. Save Changes and try again.')
+      )
+
   save: (push) ->
-    git({
+    gitAuto({
       base:  atom.project.getDirectories()[0].path
       group: true
       push:  push

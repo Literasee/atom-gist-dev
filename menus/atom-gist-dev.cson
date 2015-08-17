@@ -15,6 +15,10 @@
         'command': 'atom-gist-dev:clone'
       }
       {
+        'label': 'Get Latest from GitHub'
+        'command': 'atom-gist-dev:pull'
+      }
+      {
         'label': 'Save Changes'
         'command': 'atom-gist-dev:save'
       }

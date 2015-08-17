@@ -11,6 +11,7 @@
   "activationCommands": {
     "atom-workspace": [
       "atom-gist-dev:clone",
+      "atom-gist-dev:pull",
       "atom-gist-dev:save",
       "atom-gist-dev:save-share"
     ]
@@ -24,6 +25,7 @@
   "dependencies": {
     "atom-space-pen-views": "^2.0.5",
     "git-auto": "^1.0.3",
+    "gity": "^1.0.5",
     "space-pen": "^5.1.1"
   }
 }
