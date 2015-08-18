@@ -24,6 +24,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "atom-space-pen-views": "^2.0.5",
+    "expand-home-dir": "0.0.2",
     "git-auto": "^1.0.3",
     "gity": "^1.0.5",
     "space-pen": "^5.1.1"

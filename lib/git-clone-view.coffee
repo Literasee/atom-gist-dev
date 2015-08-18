@@ -1,6 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 child_process = require 'child_process'
+expandHomeDir = require 'expand-home-dir'
 {CompositeDisposable, BufferedProcess} = require 'atom'
 {View} = require 'space-pen'
 {TextEditorView} = require 'atom-space-pen-views'
@@ -47,7 +48,7 @@ module.exports =
       repo_url = @.urlbar.getModel().getText()
 
       # do clone
-      target_directory = atom.config.get('atom-gist-dev.target_directory') || '/tmp'
+      target_directory = expandHomeDir(atom.config.get('atom-gist-dev.target_directory') || '/tmp')
       # user inputted
       # pull out the repo name from the uri
       repo_name = get_repo_name(repo_url)
