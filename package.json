@@ -1,7 +1,7 @@
 {
   "name": "atom-gist-dev",
   "main": "./lib/atom-gist-dev",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A package to facilitate easy, all-in-one Gist development for non-developers",
   "keywords": [
     "git",
