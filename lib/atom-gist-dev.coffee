@@ -14,6 +14,9 @@ module.exports = AtomGistDev =
 
   # package config options
   config:
+    github_username:
+      type: 'string'
+      default: ''
     target_directory: # where repos will be cloned
       type: 'string'
       default: '/tmp'
@@ -82,5 +85,7 @@ module.exports = AtomGistDev =
     if push
       Promise.all(atom.project.getDirectories().map(atom.project.repositoryForDirectory.bind(atom.project))).then (repo) ->
         repoName = get_repo_name(repo[0].getOriginURL())
-        atom.clipboard.write('https://nciea-gist-viewer.herokuapp.com/' + repoName)
+        github_username = atom.config.get('atom-gist-dev.github_username')
+        if github_username then github_username += '/'
+        atom.clipboard.write('https://nciea-gist-viewer.herokuapp.com/' + github_username + repoName)
         alert('nciea-gist-viewer link has been copied to your clipboard!')
