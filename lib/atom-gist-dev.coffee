@@ -87,5 +87,3 @@ module.exports = AtomGistDev =
         repoName = get_repo_name(repo[0].getOriginURL())
         github_username = atom.config.get('atom-gist-dev.github_username')
         if github_username then github_username += '/'
-        atom.clipboard.write('https://nciea-gist-viewer.herokuapp.com/' + github_username + repoName)
-        alert('nciea-gist-viewer link has been copied to your clipboard!')
